@@ -10,7 +10,7 @@ make -C BaseTools
 source ./edksetup.sh BaseTools
 
 mv ../edk2/Conf/target.txt ../ovmf/ovmf-target-backup.txt
-cp ../ovmf/ovmf-target.txt Conf/target.txt
+cp ../ovmf/ovmf-target.txt Conf/target.txt112.255.118.72
 ../edk2/BaseTools/BinWrappers/PosixLike/build
 rm ../edk2/Conf/target.txt
 mv ../ovmf/ovmf-target-backup.txt ../edk2/Conf/target.txt

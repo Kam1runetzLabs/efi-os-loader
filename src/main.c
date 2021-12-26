@@ -12,6 +12,11 @@
 #include "ProcessorsInfo.h"
 
 #include "jumper.h"
+#include "payload.h"
+
+#define INIT_ENTRY_ADDRESS 0x10000
+#define PAYLOAD_ENTRY_ADDRESS 0x1500000
+
 
 static const CHAR16 *EfiMemoryTypes[] = {
         u"Reserved",
@@ -120,8 +125,12 @@ EFI_STATUS EFIAPI UefiMain(
               efiProcessorInformation.Location.Thread);
     }
 
-    void *initCodeAddr = (void *) 0x10000;
+    void *initCodeAddr = (void *) INIT_ENTRY_ADDRESS;
     gBS->CopyMem(initCodeAddr, (void *) jumper_bin, jumper_bin_len);
+
+    void *payloadEntryAddr = (void *) PAYLOAD_ENTRY_ADDRESS;
+    gBS->CopyMem(payloadEntryAddr, (void *) payload_bin, payload_bin_len);
+
     gBS->ExitBootServices(ImageHandle, key);
 
     for (UINT64 i = 1; i != totalProcessorsCount; ++i) {
