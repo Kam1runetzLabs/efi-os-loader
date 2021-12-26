@@ -9,12 +9,12 @@ source ./edksetup.sh
 make -C BaseTools
 source ./edksetup.sh BaseTools
 
-mv ../edk2/Conf/target.txt ../ovmf/ovmf-target-backup.txt
-cp ../ovmf/ovmf-target.txt Conf/target.txt112.255.118.72
-../edk2/BaseTools/BinWrappers/PosixLike/build
-rm ../edk2/Conf/target.txt
-mv ../ovmf/ovmf-target-backup.txt ../edk2/Conf/target.txt
-cp ../edk2/Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd ../ovmf/bios.bin
+mv Conf/target.txt ../ovmf/ovmf-target-backup.txt
+cp ../ovmf/ovmf-target.txt Conf/target.txt
+bash BaseTools/BinWrappers/PosixLike/build
+rm Conf/target.txt
+mv ../ovmf/ovmf-target-backup.txt Conf/target.txt
+cp Build/OvmfX64/DEBUG_GCC5/FV/OVMF.fd ../ovmf/bios.bin
 
 # shellcheck disable=SC2164
 cd MdeModulePkg
